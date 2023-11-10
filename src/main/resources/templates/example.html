@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:text="${person.name}"></div>
+    <div th:object="${person}">
+
+        <p th:text="*{age}"></p>
+
+        <ul th:each="hobby : *{hobbies}">
+            <li th:text="${hobby}"></li>
+
+        </ul>
+    </div>
+    <a th:href="@{/api/articles/{id}(id=${person.id})}">글보기</a>
+</body>
+</html>
