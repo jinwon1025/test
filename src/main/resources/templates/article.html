@@ -16,6 +16,26 @@
         <p th:text="${article.content}"></p>  <!-- 글 내용 -->
       </section>
     </article>
+    <input type="hidden" id="id" th:value="${article.id}">
+    <a class="btn btn-primary" th:href="@{/articles/modify/{id}(id=${article.id})}">수정</a> <!-- 수정화면으로 넘어가게끔 설정 -->
+    <a class="btn btn-danger" onClick="deleteAction()">삭제</a> <!-- 삭제 버튼이 클릭되었을 때 delete 함수 실행-->
+      <!--
+      if(!conf~~~~~){ return }     ==> 아니오를 눌렀을 때 return을 통해 함수가 끝나게 함. -->
+    <script>
+        function deleteAction(){
+            var id= document.getElementById("id").value
+            if(!confirm("정말 삭제하시겠습니까?")){
+                return
+            }
+            fetch("/api/articles/"+id,{
+                method:"DELETE",
+            })
+            .then(()=>{
+                location.replace("/articles")
+            })
+        }
+
+    </script>
   </div>
 </body>
 </html>

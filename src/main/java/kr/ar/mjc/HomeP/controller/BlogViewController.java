@@ -45,4 +45,13 @@ public class BlogViewController {
         return "newArticle"; //글을 작성하는 화면에는 데이터가 들어갈 필요가 없기 때문에 바로 리턴
     }
 
+
+    @GetMapping("/articles/modify/{id}")
+    public ModelAndView modifyArticle(@PathVariable long id){ //id가 url에 포함되어 있는 id를 가지고 온다는 것을 알려줌.
+        ModelAndView mav = new ModelAndView(); //모델과 뷰의 정보를 가지고 있는 객체, 모델 : 수정할 article(글)의 객체 view : 수정 화면
+        Article article = blogService.findOne(id); // 블로그 글 1개 가져오기
+        mav.addObject("article", article); //오브젝트 설정
+        mav.setViewName("articleModify"); //html 이름
+        return mav;
+    }
 }
